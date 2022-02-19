@@ -14,3 +14,5 @@ fail-under = 100
 [tool.coverage.report]
 fail_under = 95
 
+[tool.black]
+line-length = 100
