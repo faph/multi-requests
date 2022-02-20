@@ -26,3 +26,16 @@ def test_multiple_params_return_responses(session):
     ]
     responses = session.get(url, params=params)
     assert len(responses) == 2
+
+
+def test_multiple_urls_and_params_return_responses(session):
+    urls = [
+        "https://catfact.ninja/facts", 
+        "https://catfact.ninja/breeds",
+    ]
+    params = [
+        {"max_length": 100},
+        {"limit": 2},
+    ]
+    responses = session.get(url, params=params)
+    assert len(responses) == 2
