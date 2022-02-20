@@ -7,5 +7,5 @@ import importlib.metadata
 __version__ = importlib.metadata.version("multi-requests")
 
 
-class MultiSession():
+class MultiSession:
     """A HTTP client session supporting simultaneous requests"""
