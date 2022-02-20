@@ -1,5 +1,6 @@
-import multi_requests
 import pytest
+
+import multi_requests
 
 
 @pytest.fixture
