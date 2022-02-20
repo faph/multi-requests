@@ -30,7 +30,7 @@ def test_multiple_params_return_responses(session):
 
 def test_multiple_urls_and_params_return_responses(session):
     urls = [
-        "https://catfact.ninja/facts", 
+        "https://catfact.ninja/facts",
         "https://catfact.ninja/breeds",
     ]
     params = [
