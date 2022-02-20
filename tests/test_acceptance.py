@@ -10,13 +10,13 @@ def session():
 def test_has_version():
     assert multi_requests.__version__
 
-    
+
 def test_multiple_urls_return_responses(session):
     urls = ["https://catfact.ninja/facts", "https://catfact.ninja/breeds"]
     responses = session.get(urls)
     assert len(responses) == 2
 
-    
+
 def test_multiple_params_return_responses(session):
     url = "https://catfact.ninja/facts"
     params = [
