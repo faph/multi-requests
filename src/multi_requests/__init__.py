@@ -7,7 +7,6 @@ from typing import List, Union
 
 import requests
 
-
 __version__ = importlib.metadata.version("multi-requests")
 
 
