@@ -12,10 +12,10 @@ __version__ = importlib.metadata.version("multi-requests")
 
 class MultiSession:
     """A HTTP client session supporting simultaneous requests"""
-    
+
     def __init__(self):
         self._session = requests.Session()
-        
+
     def get(url: Union[str, List[str]], **kwargs) -> requests.Response:
         """Send a HTTP GET request"""
         return self._session.get(url, **kwargs)
