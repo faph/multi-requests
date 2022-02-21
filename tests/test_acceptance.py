@@ -16,7 +16,8 @@ def test_multiple_urls_return_responses(session):
     urls = ["https://catfact.ninja/facts", "https://catfact.ninja/breeds"]
     responses = session.get(urls)
     assert len(responses) == 2
-    
+
+
 def test_multiple_urls_with_single_params_return_responses(session):
     urls = [
         "https://catfact.ninja/facts",
