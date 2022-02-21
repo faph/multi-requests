@@ -34,7 +34,7 @@ def test_multiple_urls_with_single_params_return_responses(session):
 def test_multiple_params_return_responses(session):
     url = "https://catfact.ninja/facts"
     params = {"max_length": 100}
-    responses = session.get(urls, params=params)
+    responses = session.get(url, params=params)
     assert len(responses) == 2
 
 
