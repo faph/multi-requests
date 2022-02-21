@@ -19,4 +19,7 @@ class MultiSession:
 
     def get(self, url: Union[str, List[str]], **kwargs) -> requests.Response:
         """Send a HTTP GET request"""
-        return self._session.get(url, **kwargs)
+        if isinstance(url, str):
+            return self._session.get(url, **kwargs)
+        else:
+            return [self._session.get(single_url, **kwargs) for single_url in url]
