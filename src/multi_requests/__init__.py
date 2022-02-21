@@ -17,7 +17,7 @@ class MultiSession:
         """A HTTP client session supporting simultaneous requests"""
         self._session = requests.Session()
 
-    def get(self, url: Union[str, List[str]], **kwargs) -> requests.Response:
+    def get(self, url: Union[str, List[str]], **kwargs) -> List[requests.Response]:
         """Send a HTTP GET request"""
         if isinstance(url, str):
             return self._session.get(url, **kwargs)
