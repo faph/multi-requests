@@ -28,8 +28,3 @@ class MultiSession:
             self._session.get(**dict(zip(all_kwargs, values))) for values in kwarg_values_sequence
         ]
         return responses
-
-
-def _is_sequence(value: Any) -> bool:
-    """Return whether a given parameter value is a sequence or not"""
-    return isinstance(value, list)  # TODO: improve
