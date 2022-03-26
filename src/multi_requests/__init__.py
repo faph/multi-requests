@@ -5,6 +5,7 @@ import functools
 import importlib.metadata
 from typing import Any, List, Union
 
+import more_itertools
 import requests
 
 __version__ = importlib.metadata.version("multi-requests")
@@ -20,20 +21,12 @@ class MultiSession:
     def get(self, url: Union[str, List[str]], **kwargs) -> List[requests.Response]:
         """Send a HTTP GET request"""
         all_kwargs = {"url": url, **kwargs}
-        # Arguments that are shared and apply to all requests
-        common_kwargs = {
-            param: value for param, value in all_kwargs.items() if not _is_sequence(value)
-        }
-        # Arguments for which there is a different value for each request
-        sequence_kwargs = {
-            param: value for param, value in all_kwargs.items() if _is_sequence(value)
-        }
-        # Group them into a list, each item containing the kwargs for individual requests
-        sequence_kwargs_list = [
-            dict(zip(sequence_kwargs, group)) for group in list(zip(*sequence_kwargs.values()))
+        kwarg_values_sequence = more_itertools.zip_broadcast(
+            *all_kwargs.values(), scalar_types=(str, bytes, dict)
+        )
+        responses = [
+            self._session.get(**dict(zip(all_kwargs, values))) for values in kwarg_values_sequence
         ]
-        request_fn = functools.partial(self._session.get, **common_kwargs)
-        responses = [request_fn(**request_kwargs) for request_kwargs in sequence_kwargs_list]
         return responses
 
 
