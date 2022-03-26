@@ -1,9 +1,8 @@
 """
 multi-requests API
 """
-import functools
 import importlib.metadata
-from typing import Any, List, Union
+from typing import List, Union
 
 import more_itertools
 import requests
