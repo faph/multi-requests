@@ -8,24 +8,24 @@ arguments are lists they must have the same length.
 Usage
 -----
 
-Send a requests to multiple URLs:
+Send requests to multiple URLs::
 
->>> import multi_requests
->>> session = multi_requests.MultiSession()
->>> session.get([
-...     "https://api.github.com/users/defunkt",
-...     "https://api.github.com/users/faph",
-... ])
-[<Response [200]>, <Response [200]>]
+  >>> import multi_requests
+  >>> session = multi_requests.MultiSession()
+  >>> session.get([
+  ...     "https://api.github.com/users/defunkt",
+  ...     "https://api.github.com/users/faph",
+  ... ])
+  [<Response [200]>, <Response [200]>]
 
-Similarly, sends requests with different payloads:
+Similarly, send requests with different payloads::
 
->>> payloads = [
-...     {"name": "new repo 1"},
-...     {"name": "new repo 2"},
-]
->>> session.post("https://api.github.com/user/repos", json=payloads)
-[<Response [201]>, <Response [201]>]
+  >>> payloads = [
+  ...     {"name": "new repo 1"},
+  ...     {"name": "new repo 2"},
+  ]
+  >>> session.post("https://api.github.com/user/repos", json=payloads)
+  [<Response [201]>, <Response [201]>]
 
 """
 import importlib.metadata
