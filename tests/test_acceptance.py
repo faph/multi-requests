@@ -1,5 +1,6 @@
 import pytest
 
+import more_itertools
 import multi_requests
 
 
@@ -49,3 +50,17 @@ def test_multiple_urls_and_params_return_responses(session):
     ]
     responses = session.get(urls, params=params)
     assert len(responses) == 2
+
+
+def test_unequal_arg_length_raises(session):
+    urls = [
+        "https://catfact.ninja/facts",
+        "https://catfact.ninja/breeds",
+    ]
+    params = [
+        {"max_length": 100},
+        {"limit": 2},
+        {"limit": 2},
+    ]
+    with pytest.raises(more_itertools.UnequalIterablesError):
+        session.get(urls, params=params)
