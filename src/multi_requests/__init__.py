@@ -1,8 +1,8 @@
 """
 multi-requests API
 
-Follows the same API as :meth:`requests.Session` except that arguments to request metods can be 
-lists. Each value in such a list would correspond to a single request. If multiple (keyword) 
+Follows the same API as :meth:`requests.Session` except that arguments to request metods can be
+lists. Each value in such a list would correspond to a single request. If multiple (keyword)
 arguments are lists they must have the same length.
 
 Usage
