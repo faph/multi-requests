@@ -1,8 +1,14 @@
 """
 multi-requests API
 
+Follows the same API as :meth:`requests.Session` except that arguments to request metods can be 
+lists. Each value in such a list would correspond to a single request. If multiple (keyword) 
+arguments are lists they must have the same length.
+
 Usage
 -----
+
+Send a requests to multiple URLs:
 
 >>> import multi_requests
 >>> session = multi_requests.MultiSession()
@@ -11,6 +17,16 @@ Usage
 ...     "https://api.github.com/users/faph",
 ... ])
 [<Response [200]>, <Response [200]>]
+
+Similarly, sends requests with different payloads:
+
+>>> payloads = [
+...     {"name": "new repo 1"},
+...     {"name": "new repo 2"},
+]
+>>> session.post("https://api.github.com/user/repos", json=payloads)
+[<Response [201]>, <Response [201]>]
+
 """
 import importlib.metadata
 from typing import List, Union
@@ -32,9 +48,7 @@ class MultiSession:
         """
         Send a HTTP GET request
 
-        Follows same API as :meth:`requests.Session.get` except that arguments can be lists. Each
-        value in such a list would correspond to a single request. If multiple (keyword) arguments
-        are lists they must have the same length.
+        
         """
         return self.request("get", url=url, **kwargs)
 
