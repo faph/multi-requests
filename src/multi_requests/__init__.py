@@ -46,7 +46,7 @@ class MultiSession:
 
     def get(self, url: Union[str, List[str]], **kwargs) -> List[requests.Response]:
         """Send a HTTP GET request"""
-        return self.request("get", url=url, **kwargs)
+        return self.request("GET", url=url, **kwargs)
 
     def request(self, method: str, url: Union[str, List[str]], **kwargs) -> List[requests.Response]:
         """Send a HTTP request"""
