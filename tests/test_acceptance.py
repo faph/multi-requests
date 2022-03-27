@@ -1,6 +1,6 @@
+import more_itertools
 import pytest
 
-import more_itertools
 import multi_requests
 
 
