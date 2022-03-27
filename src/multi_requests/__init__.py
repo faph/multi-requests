@@ -18,12 +18,21 @@ class MultiSession:
         self._session = requests.Session()
 
     def get(self, url: Union[str, List[str]], **kwargs) -> List[requests.Response]:
-        """Send a HTTP GET request"""
+        """
+        Send a HTTP GET request
+
+        Follows same API as :meth:`requests.Session.get` except that arguments can be lists. Each
+        value in such a list would correspond to a single request. If multiple (keyword) arguments
+        are lists they must have the same length.
+        """
         all_kwargs = {"url": url, **kwargs}
+        # Broadcast scalar kwarg values to same length as list kwargs
         kwarg_values_sequence = more_itertools.zip_broadcast(
-            *all_kwargs.values(), scalar_types=(str, bytes, dict)
+            *all_kwargs.values(),
+            scalar_types=(str, bytes, dict),
+            strict=True,
         )
-        responses = [
-            self._session.get(**dict(zip(all_kwargs, values))) for values in kwarg_values_sequence
-        ]
+        # Combine with the kwarg keys
+        kwarg_dicts_sequence = (dict(zip(all_kwargs, values)) for values in kwarg_values_sequence)
+        responses = [self._session.get(**kwarg_dict) for kwarg_dict in kwarg_dicts_sequence]
         return responses
